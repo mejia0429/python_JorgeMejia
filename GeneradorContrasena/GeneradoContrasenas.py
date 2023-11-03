@@ -1,17 +1,23 @@
 import random
 import string
 
-def generar_contrasena(num_mayusculas, num_minusculas, num_especiales, longitud):
-    caracteres = string.ascii_uppercase * num_mayusculas + string.ascii_lowercase * num_minusculas + string.punctuation * num_especiales
+def generar_contrasena(numMayusculas, numMinusculas, numCaracter, longitud):
+    caracteres = string.ascii_uppercase * numMayusculas + string.ascii_lowercase * numMinusculas + string.punctuation * numCaracter
     contrasena = ''.join(random.choice(caracteres) for _ in range(longitud))
     return contrasena
 
-# Solicitar entrada del usuario
-num_mayusculas = int(input("Ingrese el número de letras mayúsculas: "))
-num_minusculas = int(input("Ingrese el número de letras minúsculas: "))
-num_especiales = int(input("Ingrese el número de caracteres especiales: "))
-longitud = int(input("Ingrese la longitud de la contraseña: "))
-
-# Generar y mostrar la contraseña
-nueva_contrasena = generar_contrasena(num_mayusculas, num_minusculas, num_especiales, longitud)
-print("Contraseña generada:", nueva_contrasena)
+while True:
+    try:
+        numMayusculas = int(input("Ingrese el número de letras mayúsculas: "))
+        numMinusculas = int(input("Ingrese el número de letras minúsculas: "))
+        numCaracter = int(input("Ingrese el número de caracteres especiales: "))
+        longitud = int(input("Ingrese la longitud de la contraseña: "))
+        
+        if numMayusculas + numMinusculas + numCaracter <= longitud:
+            nueva_contrasena = generar_contrasena(numMayusculas, numMinusculas, numCaracter, longitud)
+            print("Contraseña generada:", nueva_contrasena)
+            break
+        else:
+            print("Error: La suma de las letras y caracteres colicitados no puede ser mayor que la longitud de la contraseña.")
+    except ValueError:
+        print("Error: Por favor, ingrese un número válido.")
